@@ -11,9 +11,9 @@ public class Menu : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
-		fileData  = System.IO.File.ReadAllText("IngredientList.csv");
-		lines = fileData.Split("/n");
-		lineData = (lines[0].Trim()).Split(","[0]);
+		//fileData  = System.IO.File.ReadAllText("IngredientList.csv");
+//		lines = fileData.Split("/n");
+		//lineData = (lines[0].Trim()).Split(","[0]);
 	}
 	
 	// Update is called once per frame
