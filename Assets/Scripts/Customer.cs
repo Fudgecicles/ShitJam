@@ -20,7 +20,7 @@ public class Customer : MonoBehaviour {
 	public GameObject cupModel;
 	public GameObject ingredient;
 	public Drink customerDrink;
-
+	int winLose;
 	public Text ingredientOneName;
 	public Text ingredientTwoName;
 	public Text ingredientThreeName;
@@ -155,6 +155,10 @@ public class Customer : MonoBehaviour {
 		cubemanInstance = Instantiate (cubeman);
 		cubemanInstance.transform.position = this.transform.position;
 
+
+		//stuffToThrow.Add((GameObject)Instantiate (cupModel, cup.position, Quaternion.identity));
+
+
 		//stuffToThrow.Add((GameObject)Instantiate (cupModel, cup.position, Quaternion.identity));
 
 		for (int i = 0; i < codeArray.Length; i++) {
@@ -163,8 +167,6 @@ public class Customer : MonoBehaviour {
 		ingredientThreeName.text = " ";
 		ingredientTwoName.text = " ";
 		ingredientOneName.text = " ";
-
-
 
 	}
 
@@ -188,14 +190,20 @@ public class Customer : MonoBehaviour {
 
 		GetComponent<TheActualGame> ().successes++;
 		GetComponent<TheActualGame> ().drinkNo++;
-		StartCoroutine(throwCoroutine ());
 
+
+
+
+
+		winLose = 1;
+		StartCoroutine(throwCoroutine ());
 
 	}
 
 	void Lose() {
 		GetComponent<TheActualGame> ().drinkNo++;
 		GameObject.Find ("Main Camera").GetComponent<Bloom> ().settings.intensity += 1f;
+		winLose = -1;
 		StartCoroutine(throwCoroutine ());
 	}
 
@@ -206,7 +214,14 @@ public class Customer : MonoBehaviour {
 		}
 	}
 
+	void ActuallyThrow(){
+		foreach (var g in stuffToThrow) {
+			g.GetComponent<Rigidbody> ().AddForce (transform.forward*250*winLose);
+		}
+	}
+
 	IEnumerator throwCoroutine(){
+		ActuallyThrow ();
 		yield return new WaitForSeconds(0.5f);
 		Throw ();
 	}
