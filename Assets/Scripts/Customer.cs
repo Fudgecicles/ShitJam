@@ -28,7 +28,6 @@ public class Customer : MonoBehaviour {
 	Vector3 ingredientPosition;
 	System.Collections.Generic.List<GameObject> stuffToThrow;
 
->>>>>>> ecd73f888f693eba2edcbec2a9e62fe99d3fe629
 	// Use this for initialization
 	void Start () {
 		ingredientPosition = new Vector3 (29.41386f, 9.313f, 30.484f);
@@ -154,17 +153,13 @@ public class Customer : MonoBehaviour {
 	void NewCustomer() {
 		cubemanInstance = Instantiate (cubeman);
 		cubemanInstance.transform.position = this.transform.position;
-<<<<<<< HEAD
 		//stuffToThrow.Add((GameObject)Instantiate (cupModel, cup.position, Quaternion.identity));
-=======
 		for (int i = 0; i < codeArray.Length; i++) {
 			codeArray [i].text = " ";
 		}
 		ingredientThreeName.text = " ";
 		ingredientTwoName.text = " ";
 		ingredientOneName.text = " ";
-
->>>>>>> ecd73f888f693eba2edcbec2a9e62fe99d3fe629
 
 	}
 
@@ -188,11 +183,7 @@ public class Customer : MonoBehaviour {
 
 		GetComponent<TheActualGame> ().successes++;
 		GetComponent<TheActualGame> ().drinkNo++;
-<<<<<<< HEAD
 		StartCoroutine(throwCoroutine ());
-=======
-
->>>>>>> ecd73f888f693eba2edcbec2a9e62fe99d3fe629
 	}
 
 	void Lose() {
