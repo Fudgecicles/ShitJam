@@ -39,10 +39,7 @@ public class Customer : MonoBehaviour {
 			codes = new char[6];
 			letter = 0;
 		} else {
-
-			if (cubemanInstance != null) {
-				cubemanInstance.transform.position += new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
-			}
+			
 
 			foreach (char currentKey in Input.inputString) {
 				codes [letter] = currentKey;
@@ -61,7 +58,9 @@ public class Customer : MonoBehaviour {
 							}
 						}
 					}
-					Instantiate (GetComponent<Menu>().FindIngredient(ingredientOne).model, ingredientPosition, Quaternion.identity);
+					if (ingredientOne != "") {
+						Instantiate (GetComponent<Menu> ().FindIngredient (ingredientOne).model, ingredientPosition, Quaternion.identity);
+					}
 				}
 
 				if (letter == 4) {
@@ -78,7 +77,9 @@ public class Customer : MonoBehaviour {
 							}
 						}
 					}
-					Instantiate (GetComponent<Menu>().FindIngredient(ingredientTwo).model, ingredientPosition, Quaternion.identity);
+					if (ingredientTwo != "") {
+						Instantiate (GetComponent<Menu> ().FindIngredient (ingredientTwo).model, ingredientPosition, Quaternion.identity);
+					}
 				}
 
 				if (letter == 6) {
@@ -120,15 +121,13 @@ public class Customer : MonoBehaviour {
 					} else {
 						Lose ();
 					}
-
-					Instantiate (ingredient);
 				
 							
 						
-
-					Instantiate (GetComponent<Menu>().FindIngredient(ingredientThree).model, ingredientPosition, Quaternion.identity);
+					if (ingredientThree != "") {
+						Instantiate (GetComponent<Menu> ().FindIngredient (ingredientThree).model, ingredientPosition, Quaternion.identity);
+					}
 					letter = 0;
-
 				}
 
 			}
@@ -141,12 +140,19 @@ public class Customer : MonoBehaviour {
 	void NewCustomer() {
 		cubemanInstance = Instantiate (cubeman);
 		cubemanInstance.transform.position = this.transform.position;
+		for (int i = 0; i < codeArray.Length; i++) {
+			codeArray [i].text = " ";
+		}
+		ingredientThreeName.text = " ";
+		ingredientTwoName.text = " ";
+		ingredientOneName.text = " ";
+
 
 	}
 
 	void TextChange() {
 		//GetComponent <Menu> ().drinkList[0].drinkName;
-		customerDrink = GetComponent <Menu> ().drinkList [0];
+		customerDrink = GetComponent <Menu> ().RandomDrink();
 		Debug.Log (customerDrink.ingredients [0].ingredientName);
 		Debug.Log (customerDrink.ingredients [1].ingredientName);
 		Debug.Log (customerDrink.ingredients [2].ingredientName);

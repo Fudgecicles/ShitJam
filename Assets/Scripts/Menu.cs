@@ -46,9 +46,13 @@ public class Menu : MonoBehaviour {
 				drinkList[i] = new Drink();
 				if (FindIngredient (lineData [3]) == null) {
 					Debug.Log (lineData [3]);
-
 				}
-
+				if (FindIngredient (lineData [2]) == null) {
+					Debug.Log (lineData [2]);
+				}
+					if (FindIngredient (lineData [1]) == null) {
+						Debug.Log (lineData [1]);
+					}
 				drinkList [i].drinkName = lineData [0];
 				drinkList [i].ingredients [0] = FindIngredient (lineData [1]);
 				drinkList [i].ingredients [1] = FindIngredient (lineData [2]);
@@ -72,6 +76,11 @@ public class Menu : MonoBehaviour {
 	}
 
 	public Drink RandomDrink(){
-		return drinkList[Random.Range(0, drinkList.Length - 1)];
+		Drink drink = drinkList[Random.Range(0, drinkList.Length - 1)];
+		if (drink != null) {
+			return drink;
+		} else {
+			return RandomDrink ();
+		}
 	}
 }
