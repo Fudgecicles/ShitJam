@@ -20,7 +20,7 @@ public class Customer : MonoBehaviour {
 	public GameObject cupModel;
 	public GameObject ingredient;
 	public Drink customerDrink;
-
+	int winLose;
 	public Text ingredientOneName;
 	public Text ingredientTwoName;
 	public Text ingredientThreeName;
@@ -183,12 +183,14 @@ public class Customer : MonoBehaviour {
 
 		GetComponent<TheActualGame> ().successes++;
 		GetComponent<TheActualGame> ().drinkNo++;
+		winLose = 1;
 		StartCoroutine(throwCoroutine ());
 	}
 
 	void Lose() {
 		GetComponent<TheActualGame> ().drinkNo++;
 		GameObject.Find ("Main Camera").GetComponent<Bloom> ().settings.intensity += 1f;
+		winLose = -1;
 		StartCoroutine(throwCoroutine ());
 	}
 
@@ -199,7 +201,14 @@ public class Customer : MonoBehaviour {
 		}
 	}
 
+	void ActuallyThrow(){
+		foreach (var g in stuffToThrow) {
+			g.GetComponent<Rigidbody> ().AddForce (transform.forward*250*winLose);
+		}
+	}
+
 	IEnumerator throwCoroutine(){
+		ActuallyThrow ();
 		yield return new WaitForSeconds(0.5f);
 		Throw ();
 	}
