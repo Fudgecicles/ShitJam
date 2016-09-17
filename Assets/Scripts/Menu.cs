@@ -59,7 +59,7 @@ public class Menu : MonoBehaviour {
 		return ingredient;
 	}
 
-	public RandomDrink(){
+	public Drink RandomDrink(){
 		return drinkList[Random.Range(0, drinkList.Length - 1)];
 	}
 }

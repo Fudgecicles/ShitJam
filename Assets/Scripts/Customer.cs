@@ -15,6 +15,9 @@ public class Customer : MonoBehaviour {
 	public Transform cup;
 	public GameObject ingredient;
 	public Drink customerDrink;
+	public Text ingredientOneName;
+	public Text ingredientTwoName;
+	public Text ingredientThreeName;
 	// Use this for initialization
 	void Start () {
 		
@@ -46,6 +49,7 @@ public class Customer : MonoBehaviour {
 						if (i.code [0] == codes [0]) {
 							if (i.code [1] == codes [1]) {
 								ingredientOne = i.ingredientName;
+								ingredientOneName.text = ingredientOne;
 							}
 						}
 					}
@@ -60,6 +64,7 @@ public class Customer : MonoBehaviour {
 						if (i.code [0] == codes [2]) {
 							if (i.code [1] == codes [3]) {
 								ingredientTwo = i.ingredientName;
+								ingredientTwoName.text = ingredientTwo;
 							}
 						}
 					}
@@ -74,12 +79,38 @@ public class Customer : MonoBehaviour {
 						if (i.code [0] == codes [4]) {
 							if (i.code [1] == codes [5]) {
 								ingredientThree = i.ingredientName;
+								ingredientThreeName.text = ingredientThree;
 							}
 						}
 					}
+
+					bool drinkCorrect = false;
+					if (ingredientOne == customerDrink.ingredients [0].ingredientName ||
+					    ingredientOne == customerDrink.ingredients [1].ingredientName ||
+					    ingredientOne == customerDrink.ingredients [2].ingredientName) {
+
+						if (ingredientTwo == customerDrink.ingredients [0].ingredientName ||
+						    ingredientTwo == customerDrink.ingredients [1].ingredientName ||
+						    ingredientTwo == customerDrink.ingredients [2].ingredientName) {
+
+							if (ingredientThree == customerDrink.ingredients [0].ingredientName ||
+							   ingredientThree == customerDrink.ingredients [1].ingredientName ||
+							   ingredientThree == customerDrink.ingredients [2].ingredientName) {
+								Debug.Log ("fuck yeah");
+								drinkCorrect = true;
+							}
+						}
+					} 
+					if (drinkCorrect) {
+						Win();
+					} else {
+						Lose ();
+					}
+
 					Instantiate (ingredient);
+
 					letter = 0;
-					Destroy (cubemanInstance);
+
 				}
 
 			}
@@ -98,13 +129,15 @@ public class Customer : MonoBehaviour {
 		//GetComponent <Menu> ().drinkList[0].drinkName;
 		customerDrink = GetComponent <Menu> ().drinkList [0];
 		dialogue.text = "Hello, I would like a "+ customerDrink.drinkName +".";
-	
+
 	}
 
 
 
 
 	void Win() {
+		dialogue.text = "Thank you. Goodbye. Forever.";
+		Destroy (cubemanInstance);
 	}
 
 	void Lose() {
