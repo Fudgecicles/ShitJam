@@ -15,9 +15,10 @@ public class Customer : MonoBehaviour {
 	public Transform cup;
 	public GameObject ingredient;
 	public Drink customerDrink;
+	Vector3 ingredientPosition;
 	// Use this for initialization
 	void Start () {
-		
+		ingredientPosition = new Vector3 (29.41386f, 9.313f, 30.484f);
 	
 	}
 	
@@ -49,7 +50,7 @@ public class Customer : MonoBehaviour {
 							}
 						}
 					}
-					Instantiate (ingredient);
+					Instantiate (GetComponent<Menu>().FindIngredient(ingredientOne).model, ingredientPosition, Quaternion.identity);
 				}
 
 				if (letter == 4) {
@@ -63,7 +64,7 @@ public class Customer : MonoBehaviour {
 							}
 						}
 					}
-					Instantiate (ingredient);
+					Instantiate (GetComponent<Menu>().FindIngredient(ingredientTwo).model, ingredientPosition, Quaternion.identity);
 				}
 
 				if (letter == 6) {
@@ -77,7 +78,7 @@ public class Customer : MonoBehaviour {
 							}
 						}
 					}
-					Instantiate (ingredient);
+					Instantiate (GetComponent<Menu>().FindIngredient(ingredientThree).model, ingredientPosition, Quaternion.identity);
 					letter = 0;
 					Destroy (cubemanInstance);
 				}
