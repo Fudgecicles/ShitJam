@@ -23,8 +23,8 @@ public class Menu : MonoBehaviour {
 			ingredientList [i].model = (GameObject)Resources.Load(lineData [0]);
 			ingredientList [i].ingredientName = lineData [1];
 			ingredientList [i].color = lineData [2];
-			ingredientList [i].code[0] =(KeyCode) System.Enum.Parse(typeof(KeyCode), lineData[3].ToUpper()) ;
-			ingredientList [i].code[0] =(KeyCode) System.Enum.Parse(typeof(KeyCode), lineData[4].ToUpper()) ;
+			ingredientList [i].code[0] = lineData[3][0];
+			ingredientList [i].code [1] = lineData [4][0];
 		}
 
 		fileData  = System.IO.File.ReadAllText("Assets\\Scripts\\DrinkList.csv");
