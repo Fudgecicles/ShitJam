@@ -18,6 +18,7 @@ public class Customer : MonoBehaviour {
 	GameObject ingredientMod3;
 	public Transform cup;
 	public GameObject cupModel;
+	GameObject cupPrefab;
 	public GameObject ingredient;
 	public Drink customerDrink;
 	int winLose;
@@ -154,7 +155,8 @@ public class Customer : MonoBehaviour {
 	void NewCustomer() {
 		cubemanInstance = Instantiate (cubeman);
 		cubemanInstance.transform.position = this.transform.position;
-
+		cupPrefab = (GameObject)Instantiate (cupModel, cup.transform.position, Quaternion.identity);
+		stuffToThrow.Add (cupPrefab);
 
 		//stuffToThrow.Add((GameObject)Instantiate (cupModel, cup.position, Quaternion.identity));
 
@@ -201,6 +203,7 @@ public class Customer : MonoBehaviour {
 	}
 
 	void Lose() {
+		dialogue.text = "This is not what I wanted. Fuck you.";
 		GetComponent<TheActualGame> ().drinkNo++;
 		GameObject.Find ("Main Camera").GetComponent<Bloom> ().settings.intensity += 1f;
 		winLose = -1;
@@ -212,6 +215,7 @@ public class Customer : MonoBehaviour {
 		foreach (var g in stuffToThrow) {
 			GameObject.Destroy (g);
 		}
+		stuffToThrow.Clear ();
 	}
 
 	void ActuallyThrow(){

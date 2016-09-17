@@ -6,6 +6,7 @@ public class TheActualGame : MonoBehaviour {
 	public float timer;
 	public Text guiText;
 	public Text endText;
+	public GameObject endPanel;
 	bool gamestarted;
 	public int score;
 	public int drinkNo;
@@ -14,6 +15,7 @@ public class TheActualGame : MonoBehaviour {
 	void Start () {
 		gamestarted = false;
 		guiText.text = "";
+		endPanel.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -30,6 +32,7 @@ public class TheActualGame : MonoBehaviour {
 			endText.text = "TOTAL DRINKS MADE: " + drinkNo + "\n" +
 			"SUCCESSFUL ORDERS: " + successes + "\n" +
 			"TOTAL SCORE: " + drinkNo * successes + "\n";
+			endPanel.SetActive (true);
 		}
 	}
 		
