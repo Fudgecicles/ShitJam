@@ -13,7 +13,11 @@ public class Customer : MonoBehaviour {
 	public string ingredientOne;
 	public string ingredientTwo;
 	public string ingredientThree;
+	GameObject ingredientMod1;
+	GameObject ingredientMod2;
+	GameObject ingredientMod3;
 	public Transform cup;
+	public GameObject cupModel;
 	public GameObject ingredient;
 	public Drink customerDrink;
 
@@ -22,11 +26,12 @@ public class Customer : MonoBehaviour {
 	public Text ingredientThreeName;
 
 	Vector3 ingredientPosition;
+	System.Collections.Generic.List<GameObject> stuffToThrow;
 
 	// Use this for initialization
 	void Start () {
 		ingredientPosition = new Vector3 (29.41386f, 9.313f, 30.484f);
-	
+		stuffToThrow = new System.Collections.Generic.List<GameObject>();
 	}
 	
 	// Update is called once per frame
@@ -58,9 +63,11 @@ public class Customer : MonoBehaviour {
 							}
 						}
 					}
+
 					if (ingredientOne != "") {
-						Instantiate (GetComponent<Menu> ().FindIngredient (ingredientOne).model, ingredientPosition, Quaternion.identity);
-					}
+						ingredientMod1=(GameObject)Instantiate (GetComponent<Menu>().FindIngredient(ingredientOne).model, ingredientPosition, Quaternion.identity);
+						stuffToThrow.Add (ingredientMod1);
+						}
 				}
 
 				if (letter == 4) {
@@ -77,8 +84,10 @@ public class Customer : MonoBehaviour {
 							}
 						}
 					}
+
 					if (ingredientTwo != "") {
-						Instantiate (GetComponent<Menu> ().FindIngredient (ingredientTwo).model, ingredientPosition, Quaternion.identity);
+						ingredientMod2=(GameObject)Instantiate (GetComponent<Menu>().FindIngredient(ingredientTwo).model, ingredientPosition, Quaternion.identity);
+						stuffToThrow.Add (ingredientMod2);
 					}
 				}
 
@@ -125,8 +134,13 @@ public class Customer : MonoBehaviour {
 							
 						
 					if (ingredientThree != "") {
-						Instantiate (GetComponent<Menu> ().FindIngredient (ingredientThree).model, ingredientPosition, Quaternion.identity);
+						ingredientMod3= (GameObject)Instantiate (GetComponent<Menu>().FindIngredient(ingredientThree).model, ingredientPosition, Quaternion.identity);
+						stuffToThrow.Add (ingredientMod3);
+
 					}
+
+					Destroy (cubemanInstance);
+					StartCoroutine(throwCoroutine ());
 					letter = 0;
 				}
 
@@ -140,12 +154,16 @@ public class Customer : MonoBehaviour {
 	void NewCustomer() {
 		cubemanInstance = Instantiate (cubeman);
 		cubemanInstance.transform.position = this.transform.position;
+
+		//stuffToThrow.Add((GameObject)Instantiate (cupModel, cup.position, Quaternion.identity));
+
 		for (int i = 0; i < codeArray.Length; i++) {
 			codeArray [i].text = " ";
 		}
 		ingredientThreeName.text = " ";
 		ingredientTwoName.text = " ";
 		ingredientOneName.text = " ";
+
 
 
 	}
@@ -170,12 +188,27 @@ public class Customer : MonoBehaviour {
 
 		GetComponent<TheActualGame> ().successes++;
 		GetComponent<TheActualGame> ().drinkNo++;
+		StartCoroutine(throwCoroutine ());
+
 
 	}
 
 	void Lose() {
 		GetComponent<TheActualGame> ().drinkNo++;
 		GameObject.Find ("Main Camera").GetComponent<Bloom> ().settings.intensity += 1f;
+		StartCoroutine(throwCoroutine ());
+	}
+
+	void Throw()
+	{
+		foreach (var g in stuffToThrow) {
+			GameObject.Destroy (g);
+		}
+	}
+
+	IEnumerator throwCoroutine(){
+		yield return new WaitForSeconds(0.5f);
+		Throw ();
 	}
 
 }
