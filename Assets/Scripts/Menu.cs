@@ -44,7 +44,6 @@ public class Menu : MonoBehaviour {
 			drinkList [i].ingredients [2] = FindIngredient(lineData [3]);
 
 		}
-			
 	}
 
 
