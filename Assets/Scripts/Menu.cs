@@ -13,46 +13,58 @@ public class Menu : MonoBehaviour {
 
 	void Start () {
 		fileData  = System.IO.File.ReadAllText("Assets\\Scripts\\IngredientList.csv");
-		lines = fileData.Split (new char[]{ '\n' });
+		lines = fileData.Split (new char[]{ '\r','\n' });
 		ingredientList = new Ingredient[lines.Length];
 
 		for(int i = 0; i < lines.Length-1; i++)
 		{
-			ingredientList [i] = new Ingredient ();
 			lineData = lines[i].Split(',');
-			ingredientList [i].model = (GameObject)Resources.Load(lineData [0]);
-			ingredientList [i].ingredientName = lineData [1];
-			ingredientList [i].color = lineData [2];
-			ingredientList [i].code[0] = lineData[3][0];
-			ingredientList [i].code [1] = lineData [4][0];
+			if (lineData.Length > 1) {
+				ingredientList [i] = new Ingredient ();
+
+				ingredientList [i].model = (GameObject)Resources.Load (lineData [0]);
+				ingredientList [i].ingredientName = lineData [1];
+				ingredientList [i].color = lineData [2];
+				ingredientList [i].code [0] = lineData [3] [0];
+				ingredientList [i].code [1] = lineData [4] [0];
+			}
+		//	Debug.Log (ingredientList [i].ingredientName);
 		}
 
 		fileData  = System.IO.File.ReadAllText("Assets\\Scripts\\DrinkList.csv");
 		Debug.Log (fileData);
-		lines = fileData.Split (new char[]{ '\n' });
+		lines = fileData.Split (new char[]{ '\r','\n' });
 
 		drinkList = new Drink[lines.Length];
 
 		for(int i = 0; i < lines.Length-1; i++)
 		{
-			drinkList[i] = new Drink();
+			
 			lineData = lines[i].Split(',');
 
-			drinkList [i].drinkName = lineData [0];
-			drinkList [i].ingredients [0] = FindIngredient(lineData [1]);
-			drinkList [i].ingredients [1] = FindIngredient(lineData [2]);
-			drinkList [i].ingredients [2] = FindIngredient(lineData [3]);
+			if (lineData.Length > 1) {
+				drinkList[i] = new Drink();
+				if (FindIngredient (lineData [3]) == null) {
+					Debug.Log (lineData [3]);
 
+				}
+
+				drinkList [i].drinkName = lineData [0];
+				drinkList [i].ingredients [0] = FindIngredient (lineData [1]);
+				drinkList [i].ingredients [1] = FindIngredient (lineData [2]);
+				drinkList [i].ingredients [2] = FindIngredient (lineData [3]);
+			}
 		}
 	}
 
 
 	public Ingredient FindIngredient(string name)
 	{
-		Ingredient ingredient = new Ingredient();
+		Ingredient ingredient = null;
 		for (int i = 0; i < ingredientList.Length - 1; i++) {
-			ingredient = ingredientList [i];
-			if (ingredient.ingredientName.Equals (name)) {
+			
+			if (ingredientList[i] != null && ingredientList[i].ingredientName== (name)) {
+				ingredient = ingredientList [i];
 				break;
 			}
 		}

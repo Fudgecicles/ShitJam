@@ -4,12 +4,16 @@ using UnityEngine.UI;
 
 public class TheActualGame : MonoBehaviour {
 	public float timer;
-	public Text guitext;
+	public Text guiText;
+	public Text endText;
 	bool gamestarted;
+	public int score;
+	public int drinkNo;
+	public int successes;
 	// Use this for initialization
 	void Start () {
 		gamestarted = false;
-		guitext.text = "";
+		guiText.text = "";
 	}
 	
 	// Update is called once per frame
@@ -19,7 +23,13 @@ public class TheActualGame : MonoBehaviour {
 		}
 		if (gamestarted) {
 			timer -= Time.deltaTime;
-			guitext.text = "Time Left: " + Mathf.RoundToInt (timer).ToString ();
+			guiText.text = "Time Left: " + Mathf.RoundToInt (timer).ToString ();
+		}
+
+		if (timer <= 0f) {
+			endText.text = "total drinks made: " + drinkNo + "\n" +
+			"successful orders: " + successes + "\n" +
+			"Total Score: " + drinkNo * successes + "\n";
 		}
 	}
 		
