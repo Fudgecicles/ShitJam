@@ -15,12 +15,16 @@ public class Customer : MonoBehaviour {
 	public Transform cup;
 	public GameObject ingredient;
 	public Drink customerDrink;
+
 	public Text ingredientOneName;
 	public Text ingredientTwoName;
 	public Text ingredientThreeName;
+
+	Vector3 ingredientPosition;
+
 	// Use this for initialization
 	void Start () {
-		
+		ingredientPosition = new Vector3 (29.41386f, 9.313f, 30.484f);
 	
 	}
 	
@@ -50,10 +54,11 @@ public class Customer : MonoBehaviour {
 							if (i.code [1] == codes [1]) {
 								ingredientOne = i.ingredientName;
 								ingredientOneName.text = ingredientOne;
+								Debug.Log (i.ingredientName);
 							}
 						}
 					}
-					Instantiate (ingredient);
+					Instantiate (GetComponent<Menu>().FindIngredient(ingredientOne).model, ingredientPosition, Quaternion.identity);
 				}
 
 				if (letter == 4) {
@@ -65,10 +70,12 @@ public class Customer : MonoBehaviour {
 							if (i.code [1] == codes [3]) {
 								ingredientTwo = i.ingredientName;
 								ingredientTwoName.text = ingredientTwo;
+
+								Debug.Log (i.ingredientName);
 							}
 						}
 					}
-					Instantiate (ingredient);
+					Instantiate (GetComponent<Menu>().FindIngredient(ingredientTwo).model, ingredientPosition, Quaternion.identity);
 				}
 
 				if (letter == 6) {
@@ -84,14 +91,18 @@ public class Customer : MonoBehaviour {
 						}
 					}
 
+					Debug.Log (ingredientThree);
+
 					bool drinkCorrect = false;
 					if (ingredientOne == customerDrink.ingredients [0].ingredientName ||
 					    ingredientOne == customerDrink.ingredients [1].ingredientName ||
 					    ingredientOne == customerDrink.ingredients [2].ingredientName) {
+						Debug.Log ("one down");
 
 						if (ingredientTwo == customerDrink.ingredients [0].ingredientName ||
 						    ingredientTwo == customerDrink.ingredients [1].ingredientName ||
 						    ingredientTwo == customerDrink.ingredients [2].ingredientName) {
+							Debug.Log ("two down");
 
 							if (ingredientThree == customerDrink.ingredients [0].ingredientName ||
 							   ingredientThree == customerDrink.ingredients [1].ingredientName ||
@@ -108,7 +119,11 @@ public class Customer : MonoBehaviour {
 					}
 
 					Instantiate (ingredient);
+				
+							
+						
 
+					Instantiate (GetComponent<Menu>().FindIngredient(ingredientThree).model, ingredientPosition, Quaternion.identity);
 					letter = 0;
 
 				}
@@ -123,11 +138,15 @@ public class Customer : MonoBehaviour {
 	void NewCustomer() {
 		cubemanInstance = Instantiate (cubeman);
 		cubemanInstance.transform.position = this.transform.position;
+
 	}
 
 	void TextChange() {
 		//GetComponent <Menu> ().drinkList[0].drinkName;
 		customerDrink = GetComponent <Menu> ().drinkList [0];
+		Debug.Log (customerDrink.ingredients [0].ingredientName);
+		Debug.Log (customerDrink.ingredients [1].ingredientName);
+		Debug.Log (customerDrink.ingredients [2].ingredientName);
 		dialogue.text = "Hello, I would like a "+ customerDrink.drinkName +".";
 
 	}
