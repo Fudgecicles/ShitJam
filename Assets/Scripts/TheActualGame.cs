@@ -23,13 +23,13 @@ public class TheActualGame : MonoBehaviour {
 		}
 		if (gamestarted) {
 			timer -= Time.deltaTime;
-			guiText.text = "Time Left: " + Mathf.RoundToInt (timer).ToString ();
+			guiText.text = "TIME LEFT: " + Mathf.RoundToInt (timer).ToString ();
 		}
 
 		if (timer <= 0f) {
-			endText.text = "total drinks made: " + drinkNo + "\n" +
-			"successful orders: " + successes + "\n" +
-			"Total Score: " + drinkNo * successes + "\n";
+			endText.text = "TOTAL DRINKS MADE: " + drinkNo + "\n" +
+			"SUCCESSFUL ORDERS: " + successes + "\n" +
+			"TOTAL SCORE: " + drinkNo * successes + "\n";
 		}
 	}
 		

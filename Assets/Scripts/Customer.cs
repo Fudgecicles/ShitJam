@@ -20,8 +20,15 @@ public class Customer : MonoBehaviour {
 	public GameObject cupModel;
 	public GameObject ingredient;
 	public Drink customerDrink;
+
+	public Text ingredientOneName;
+	public Text ingredientTwoName;
+	public Text ingredientThreeName;
+
 	Vector3 ingredientPosition;
 	System.Collections.Generic.List<GameObject> stuffToThrow;
+
+>>>>>>> ecd73f888f693eba2edcbec2a9e62fe99d3fe629
 	// Use this for initialization
 	void Start () {
 		ingredientPosition = new Vector3 (29.41386f, 9.313f, 30.484f);
@@ -38,10 +45,7 @@ public class Customer : MonoBehaviour {
 			codes = new char[6];
 			letter = 0;
 		} else {
-
-			if (cubemanInstance != null) {
-				cubemanInstance.transform.position += new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
-			}
+			
 
 			foreach (char currentKey in Input.inputString) {
 				codes [letter] = currentKey;
@@ -55,12 +59,16 @@ public class Customer : MonoBehaviour {
 						if (i.code [0] == codes [0]) {
 							if (i.code [1] == codes [1]) {
 								ingredientOne = i.ingredientName;
+								ingredientOneName.text = ingredientOne;
 								Debug.Log (i.ingredientName);
 							}
 						}
 					}
 					ingredientMod1=(GameObject)Instantiate (GetComponent<Menu>().FindIngredient(ingredientOne).model, ingredientPosition, Quaternion.identity);
 					stuffToThrow.Add (ingredientMod1);
+					if (ingredientOne != "") {
+						Instantiate (GetComponent<Menu> ().FindIngredient (ingredientOne).model, ingredientPosition, Quaternion.identity);
+					}
 				}
 
 				if (letter == 4) {
@@ -71,12 +79,17 @@ public class Customer : MonoBehaviour {
 						if (i.code [0] == codes [2]) {
 							if (i.code [1] == codes [3]) {
 								ingredientTwo = i.ingredientName;
+								ingredientTwoName.text = ingredientTwo;
+
 								Debug.Log (i.ingredientName);
 							}
 						}
 					}
 					ingredientMod2=(GameObject)Instantiate (GetComponent<Menu>().FindIngredient(ingredientTwo).model, ingredientPosition, Quaternion.identity);
 					stuffToThrow.Add (ingredientMod2);
+					if (ingredientTwo != "") {
+						Instantiate (GetComponent<Menu> ().FindIngredient (ingredientTwo).model, ingredientPosition, Quaternion.identity);
+					}
 				}
 
 				if (letter == 6) {
@@ -87,15 +100,48 @@ public class Customer : MonoBehaviour {
 						if (i.code [0] == codes [4]) {
 							if (i.code [1] == codes [5]) {
 								ingredientThree = i.ingredientName;
-								Debug.Log (i.ingredientName);
+								ingredientThreeName.text = ingredientThree;
 							}
 						}
 					}
+
+					Debug.Log (ingredientThree);
+
+					bool drinkCorrect = false;
+					if (ingredientOne == customerDrink.ingredients [0].ingredientName ||
+					    ingredientOne == customerDrink.ingredients [1].ingredientName ||
+					    ingredientOne == customerDrink.ingredients [2].ingredientName) {
+						Debug.Log ("one down");
+
+						if (ingredientTwo == customerDrink.ingredients [0].ingredientName ||
+						    ingredientTwo == customerDrink.ingredients [1].ingredientName ||
+						    ingredientTwo == customerDrink.ingredients [2].ingredientName) {
+							Debug.Log ("two down");
+
+							if (ingredientThree == customerDrink.ingredients [0].ingredientName ||
+							   ingredientThree == customerDrink.ingredients [1].ingredientName ||
+							   ingredientThree == customerDrink.ingredients [2].ingredientName) {
+								Debug.Log ("fuck yeah");
+								drinkCorrect = true;
+							}
+						}
+					} 
+					if (drinkCorrect) {
+						Win();
+					} else {
+						Lose ();
+					}
+				
+							
+						
+					if (ingredientThree != "") {
+						Instantiate (GetComponent<Menu> ().FindIngredient (ingredientThree).model, ingredientPosition, Quaternion.identity);
+					}
 					ingredientMod3= (GameObject)Instantiate (GetComponent<Menu>().FindIngredient(ingredientThree).model, ingredientPosition, Quaternion.identity);
 					stuffToThrow.Add (ingredientMod3);
-					letter = 0;
 					Destroy (cubemanInstance);
 					StartCoroutine(throwCoroutine ());
+					letter = 0;
 				}
 
 			}
@@ -108,24 +154,45 @@ public class Customer : MonoBehaviour {
 	void NewCustomer() {
 		cubemanInstance = Instantiate (cubeman);
 		cubemanInstance.transform.position = this.transform.position;
+<<<<<<< HEAD
 		//stuffToThrow.Add((GameObject)Instantiate (cupModel, cup.position, Quaternion.identity));
+=======
+		for (int i = 0; i < codeArray.Length; i++) {
+			codeArray [i].text = " ";
+		}
+		ingredientThreeName.text = " ";
+		ingredientTwoName.text = " ";
+		ingredientOneName.text = " ";
+
+>>>>>>> ecd73f888f693eba2edcbec2a9e62fe99d3fe629
 
 	}
 
 	void TextChange() {
 		//GetComponent <Menu> ().drinkList[0].drinkName;
-		customerDrink = GetComponent <Menu> ().drinkList [0];
+		customerDrink = GetComponent <Menu> ().RandomDrink();
+		Debug.Log (customerDrink.ingredients [0].ingredientName);
+		Debug.Log (customerDrink.ingredients [1].ingredientName);
+		Debug.Log (customerDrink.ingredients [2].ingredientName);
 		dialogue.text = "Hello, I would like a "+ customerDrink.drinkName +".";
-	
+
 	}
 
 
 
 
 	void Win() {
+
+		dialogue.text = "Thank you. Goodbye. Forever.";
+		Destroy (cubemanInstance);
+
 		GetComponent<TheActualGame> ().successes++;
 		GetComponent<TheActualGame> ().drinkNo++;
+<<<<<<< HEAD
 		StartCoroutine(throwCoroutine ());
+=======
+
+>>>>>>> ecd73f888f693eba2edcbec2a9e62fe99d3fe629
 	}
 
 	void Lose() {
