@@ -20,7 +20,7 @@ public class Menu : MonoBehaviour {
 		{
 			ingredientList [i] = new Ingredient ();
 			lineData = lines[i].Split(',');
-			ingredientList [i].model = lineData [0];
+			ingredientList [i].model = (GameObject)Resources.Load(lineData [0]);
 			ingredientList [i].ingredientName = lineData [1];
 			ingredientList [i].color = lineData [2];
 			ingredientList [i].code[0] =(KeyCode) System.Enum.Parse(typeof(KeyCode), lineData[3].ToUpper()) ;
@@ -59,7 +59,7 @@ public class Menu : MonoBehaviour {
 		return ingredient;
 	}
 
-	public RandomDrink(){
+	public Drink RandomDrink(){
 		return drinkList[Random.Range(0, drinkList.Length - 1)];
 	}
 }

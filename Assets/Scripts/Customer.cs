@@ -47,6 +47,7 @@ public class Customer : MonoBehaviour {
 
 	void NewCustomer() {
 		cubemanInstance = Instantiate (cubeman);
+		Instantiate (GetComponent<Menu> ().drinkList [0].ingredients [0].model, cubemanInstance.transform.position, Quaternion.identity);
 	}
 
 	void TextChange() {
