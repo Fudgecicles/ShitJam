@@ -110,9 +110,12 @@ public class Customer : MonoBehaviour {
 
 
 	void Win() {
+		GetComponent<TheActualGame> ().successes++;
+		GetComponent<TheActualGame> ().drinkNo++;
 	}
 
 	void Lose() {
+		GetComponent<TheActualGame> ().drinkNo++;
 	}
 
 }
