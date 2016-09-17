@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityStandardAssets.CinematicEffects;
 
 public class Customer : MonoBehaviour {
 	public GameObject cubeman;
@@ -30,6 +31,8 @@ public class Customer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			NewCustomer ();
 			TextChange ();
@@ -155,11 +158,18 @@ public class Customer : MonoBehaviour {
 
 
 	void Win() {
+
 		dialogue.text = "Thank you. Goodbye. Forever.";
 		Destroy (cubemanInstance);
+
+		GetComponent<TheActualGame> ().successes++;
+		GetComponent<TheActualGame> ().drinkNo++;
+
 	}
 
 	void Lose() {
+		GetComponent<TheActualGame> ().drinkNo++;
+		GameObject.Find ("Main Camera").GetComponent<Bloom> ().settings.intensity += 1f;
 	}
 
 }
