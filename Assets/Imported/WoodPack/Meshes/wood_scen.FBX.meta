@@ -6,10 +6,48 @@ ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Camera
+    100004: Cube
+    100006: Cube.001
+    100008: Cube.002
+    100010: Cube.003
+    100012: Cylinder.007
+    100014: Lamp
+    100016: Plane
+    100018: wood_scen
     400000: //RootNode
+    400002: Camera
+    400004: Cube
+    400006: Cube.001
+    400008: Cube.002
+    400010: Cube.003
+    400012: Cylinder.007
+    400014: Lamp
+    400016: Plane
+    400018: wood_scen
     2300000: //RootNode
+    2300002: Cube
+    2300004: Cube.001
+    2300006: Cube.002
+    2300008: Cube.003
+    2300010: Cylinder.007
+    2300012: Plane
+    2300014: wood_scen
     3300000: //RootNode
+    3300002: Cube
+    3300004: Cube.001
+    3300006: Cube.002
+    3300008: Cube.003
+    3300010: Cylinder.007
+    3300012: Plane
+    3300014: wood_scen
     4300000: wood_scen
+    4300002: Cube
+    4300004: Plane
+    4300006: Cylinder.007
+    4300008: Cube.001
+    4300010: Cube.002
+    4300012: Cube.003
   materials:
     importMaterials: 1
     materialName: 0
@@ -17,7 +55,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
@@ -39,7 +77,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
