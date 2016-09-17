@@ -19,6 +19,5 @@ public class JitterTonemapping : MonoBehaviour {
         TonemappingColorGrading.TonemappingSettings settings = tonemapping.tonemapping;
         settings.neutralWhiteIn = initialWhiteIn + Random.Range(-jitterMax, jitterMax);
         tonemapping.tonemapping = settings;
-        Debug.Log("running");
 	}
 }
