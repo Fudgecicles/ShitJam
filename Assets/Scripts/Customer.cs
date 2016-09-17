@@ -50,7 +50,8 @@ public class Customer : MonoBehaviour {
 	}
 
 	void TextChange() {
-		dialogue.text = "Hello, I would like a ";
+		//GetComponent <Menu> ().drinkList[0].drinkName;
+		dialogue.text = "Hello, I would like a "+ GetComponent <Menu> ().drinkList[0].drinkName +".";
 	}
 
 	void CheckIngredients(){
