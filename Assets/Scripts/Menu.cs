@@ -47,7 +47,7 @@ public class Menu : MonoBehaviour {
 	}
 
 
-	Ingredient FindIngredient(string name)
+	public Ingredient FindIngredient(string name)
 	{
 		Ingredient ingredient = new Ingredient();
 		for (int i = 0; i < ingredientList.Length - 1; i++) {
@@ -57,5 +57,9 @@ public class Menu : MonoBehaviour {
 			}
 		}
 		return ingredient;
+	}
+
+	public RandomDrink(){
+		return drinkList[Random.Range(0, drinkList.Length - 1)];
 	}
 }
