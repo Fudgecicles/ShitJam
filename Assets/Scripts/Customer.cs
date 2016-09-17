@@ -47,6 +47,7 @@ public class Customer : MonoBehaviour {
 						if (i.code [0] == codes [0]) {
 							if (i.code [1] == codes [1]) {
 								ingredientOne = i.ingredientName;
+								Debug.Log (i.ingredientName);
 							}
 						}
 					}
@@ -61,6 +62,7 @@ public class Customer : MonoBehaviour {
 						if (i.code [0] == codes [2]) {
 							if (i.code [1] == codes [3]) {
 								ingredientTwo = i.ingredientName;
+								Debug.Log (i.ingredientName);
 							}
 						}
 					}
@@ -75,6 +77,7 @@ public class Customer : MonoBehaviour {
 						if (i.code [0] == codes [4]) {
 							if (i.code [1] == codes [5]) {
 								ingredientThree = i.ingredientName;
+								Debug.Log (i.ingredientName);
 							}
 						}
 					}
