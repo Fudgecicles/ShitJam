@@ -25,6 +25,7 @@ public class Customer : MonoBehaviour {
 	public Text ingredientOneName;
 	public Text ingredientTwoName;
 	public Text ingredientThreeName;
+	public GameObject explosionPrefab;
 
 	Vector3 ingredientPosition;
 	System.Collections.Generic.List<GameObject> stuffToThrow;
@@ -39,7 +40,7 @@ public class Customer : MonoBehaviour {
 	void Update () {
 
 
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (cubemanInstance == null && Input.GetKeyDown (KeyCode.Space)) {
 			NewCustomer ();
 			TextChange ();
 			codes = new char[6];
@@ -126,6 +127,9 @@ public class Customer : MonoBehaviour {
 							}
 						}
 					} 
+
+					GameObject explosion = Instantiate (explosionPrefab);
+					explosion.transform.position = cubemanInstance.transform.position;
 					if (drinkCorrect) {
 						Win();
 					} else {
@@ -188,6 +192,8 @@ public class Customer : MonoBehaviour {
 	void Win() {
 
 		dialogue.text = "Thank you. Goodbye. Forever.";
+
+
 		Destroy (cubemanInstance);
 
 		GetComponent<TheActualGame> ().successes++;

@@ -34,6 +34,9 @@ public class TheActualGame : MonoBehaviour {
 			"TOTAL SCORE: " + drinkNo * successes + "\n";
 			endPanel.SetActive (true);
 		}
+		if (Input.GetKeyDown (KeyCode.F12)) {
+			Application.LoadLevel (0);
+		}
 	}
 		
 }
